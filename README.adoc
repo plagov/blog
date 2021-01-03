@@ -1,0 +1,28 @@
+== Info
+The source code of my blog which is hosted on https://plagov.github.io
+
+=== Local preview with Docker
+Run the following Docker command to preview the blog locally before submitting any changes to origin:
+
+[source,bash]
+----
+docker run --rm -p 4000:4000 --volume="$PWD:/srv/jekyll" -it jekyll/jekyll:stable jekyll serve --watch
+----
+
+If running on Windows, run the following command in PowerShell (admin rights might be needed):
+
+[source,bash]
+
+docker run --name jekyll --rm --volume=".:/srv/jekyll" -it jekyll/jekyll:stable jekyll serve --watch
+
+Run this command from jekyll blog root directory.
+
+When creating a post with AsciiDoc, the following attributes should be set in document right after the title:
+
+[source]
+----
+:source-highlighter:
+:sectlinks:
+:sectanchors:
+:toc:
+----
