@@ -3,8 +3,7 @@ title: "Load Testing With Gatling"
 date: 2019-03-12T21:18:54+02:00
 draft: false
 ---
-In the 
-[previous blog post](https://plagov.github.io/2018/09/13/running-multiple-parallel-requests-with-restassured-and-testng.html), 
+In the [previous blog post]({{< ref "2018-09-13-running-multiple-parallel-requests-with-restassured-and-testng.md" >}})
 I've described how to use Dataprovider of TestNG to assert the response time of the REST API endpoint when sending 
 multiple parallel requests. In this blog post, I will describe how to do the same with Gatling, which is a more 
 suitable tool for such kind of task.
