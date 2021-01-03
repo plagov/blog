@@ -1,0 +1,7 @@
+[submodule "public"]
+	path = public
+	url = https://github.com/plagov/plagov.github.io.git
+	branch = main
+[submodule "themes/anubis"]
+	path = themes/anubis
+	url = https://github.com/mitrichius/hugo-theme-anubis.git
