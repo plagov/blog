@@ -1,0 +1,29 @@
+name: Deploy Hugo to GitHub Pages
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Setup hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.69.0"
+
+      - name: Build
+        run: hugo
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.DEPLOY_HUGO_TOKEN }}
+          external_repository: plagov/plagov.github.io
+          publish_dir: ./public
+          user_name: Vitali Plagov
+          user_email: vitalii.plagov@gmail.com
+          publish_branch: main
