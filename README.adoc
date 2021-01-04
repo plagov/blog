@@ -9,24 +9,5 @@ Hugo server:
 hugo server -D
 
 == Deploy
-After finishing writing the text of the post, build the page from source by running command:
-
-[source,shell script]
-hugo
-
-That will build HTML files in `./public` directory. Then, commit and push everything either by running the shell
-script:
-
-[source,shell script]
-bash ./deploy.sh
-
-Or open the `./public` directory manually, stage, commit and push changes to the origin:
-
-[source,shell script]
-git add .
-git commit -m "Commit message"
-git push -u origin main
-
-That will push the rendered version of the blog to GitHub Pages hosting.
-
-To commit changes in source code, go to the root of the `blog` repository and commit everything as usual.
+Deployment of the content to GitHub Pages is done automatically by the specified GitHub Actions workflow.
+The workflow is triggered by the push into the `master` branch.
