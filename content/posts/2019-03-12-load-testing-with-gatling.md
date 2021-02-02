@@ -35,7 +35,7 @@ Let's create a new Maven project. To add Gatling to the project, add the followi
   <dependency>
     <groupId>io.gatling.highcharts</groupId>
     <artifactId>gatling-charts-highcharts</artifactId>
-    <version>3.5.0</version>
+    <version>3.5.1</version>
   </dependency>
 </dependencies>
 ```
