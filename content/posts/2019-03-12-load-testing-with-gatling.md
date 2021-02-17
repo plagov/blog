@@ -47,7 +47,7 @@ Since we're using Maven, a `gatling-maven-plugin` should be added. Put this bloc
 <plugin>
   <groupId>io.gatling</groupId>
   <artifactId>gatling-maven-plugin</artifactId>
-  <version>3.1.1</version>
+  <version>3.1.2</version>
 </plugin>
 ```
 
