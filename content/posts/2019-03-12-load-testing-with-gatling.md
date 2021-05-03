@@ -57,7 +57,7 @@ And the final thing, to be able to run Scala with Maven, add `scala-maven-plugin
 <plugin>
   <groupId>net.alchim31.maven</groupId>
   <artifactId>scala-maven-plugin</artifactId>
-  <version>4.4.0</version>
+  <version>4.5.1</version>
 </plugin>
 ```
 
