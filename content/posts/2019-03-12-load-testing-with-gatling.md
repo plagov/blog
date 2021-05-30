@@ -35,7 +35,7 @@ Let's create a new Maven project. To add Gatling to the project, add the followi
   <dependency>
     <groupId>io.gatling.highcharts</groupId>
     <artifactId>gatling-charts-highcharts</artifactId>
-    <version>3.5.1</version>
+    <version>3.6.0</version>
   </dependency>
 </dependencies>
 ```
@@ -57,7 +57,7 @@ And the final thing, to be able to run Scala with Maven, add `scala-maven-plugin
 <plugin>
   <groupId>net.alchim31.maven</groupId>
   <artifactId>scala-maven-plugin</artifactId>
-  <version>4.5.1</version>
+  <version>4.5.2</version>
 </plugin>
 ```
 
