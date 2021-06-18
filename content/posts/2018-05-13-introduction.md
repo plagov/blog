@@ -7,7 +7,8 @@ Welcome to my personal blog!
 <!--more-->
 
 My name is Vitali Plagov. I'm a Test Automation Engineer.
-In this blog I'm going to write about things that are interesting for me and might be interesting and useful for you.
+In this personal blog I'm writing occasionally about things that are interesting for me and might be interesting and 
+useful for you.
 
 My profiles and contacts on different platforms:
 
