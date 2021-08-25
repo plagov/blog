@@ -1,6 +1,6 @@
 languageCode: "en-us"
 baseUrl: ""
-title: "Vitali Plagov's Blog"
+title: "Vitali Plagov Blog"
 theme: "anubis"
 paginate: 10
 disqusShortname: yourdiscussshortname
