@@ -3,6 +3,7 @@ title = "Project Euler: Solving problem 8"
 date = "2021-08-27"
 author = "Vitali Plagov"
 tags = ["project-euler"]
+draft: false
 +++
 
 Project Euler is a website with hundreds of mathematical and algorithmic problems. Some time ago I started solving those
