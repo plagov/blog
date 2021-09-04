@@ -29,6 +29,9 @@ params:
   paginationSinglePost: true
   style: auto
   readMore: false
+  env: production
+  customCSS:
+     - css/myCustomStyle.css
 
 markup:
   goldmark:

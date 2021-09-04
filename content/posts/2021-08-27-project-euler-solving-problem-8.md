@@ -6,9 +6,10 @@ tags = ["project-euler"]
 draft = false
 +++
 
-Project Euler is a website with hundreds of mathematical and algorithmic problems. Some time ago I started solving those
-issues using Java. My goal is to practice general programing and algorithmic skills using the latest version of Java.
-So, in this blog post, I will shortly describe the solution to problem 8.
+[Project Euler](https://projecteuler.net/) is a website with hundreds of mathematical and algorithmic problems. 
+Some time ago I started solving those issues using Java. My goal is to practice general programing and 
+algorithmic skills using the latest version of Java. So, in this blog post, I will shortly describe the solution to
+problem 8.
 <!--more-->
 
 # Task
