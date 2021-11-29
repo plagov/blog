@@ -1,6 +1,6 @@
 +++
 title = "How I learned about the rule engine pattern with Java"
-date = "2021-10-11"
+date = "2021-11-30"
 author = "Vitali Plagov"
 draft = true
 +++
