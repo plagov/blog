@@ -72,3 +72,25 @@ unless the business logic of the rule is updated.
 
 We define other rules the same way. Validate if the input matches the given condition, build and return a respective 
 XPath expression. Otherwise, an empty result.
+
+### Rule result
+
+The above code has a usage of the `AncestorResult`. The purpose of this class is to wrap the result of the 
+successful evaluation. This class looks as follows:
+
+```java
+public class AncestorResult {
+
+  private final String value;
+
+  public AncestorResult(String value) {
+    this.value = value;
+  }
+
+  public String getValue() {
+    return value;
+  }
+}
+```
+
+Just one class field that we set via constructor and access it with a getter.
