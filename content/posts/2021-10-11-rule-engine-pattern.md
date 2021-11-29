@@ -94,3 +94,41 @@ public class AncestorResult {
 ```
 
 Just one class field that we set via constructor and access it with a getter.
+
+### Rule Engine class
+
+Now, let's finally get to the class that holds the rule engine logic.
+
+```java
+public class AncestorRuleEngine {
+
+    private static final List<AncestorRule> rules = Arrays.asList(
+        new AncestorWithTagRule(),
+        new AncestorWithClassRule(),
+        new AncestorWithAttributeRule(),
+        new AncestorWithAttributeAndValueRule()
+    );
+
+    public AncestorResult process(String selector) {
+        return rules
+            .stream()
+            .map(rule -> rule.evaluate(selector))
+            .flatMap(optional -> optional.map(Stream::of).orElseGet(Stream::empty))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("Selector does not match any rule"));
+    }
+}
+```
+
+First thing that is done in this class is a static list of all the rules that are applicable to this domain. If we 
+have a new rule - we implement a new class and add it to this list of rules.
+
+Second thing is the processing of the client's input across all rules. It streams the list of rules, evaluates each 
+of them. The first non-empty result of the rule is being returned to the client. Otherwise, the rule engine will 
+throw an exception.
+
+A bit about the `flatMap()` operation. The previous `map()` function returns a stream of Optionals. Then, the 
+`flatMap()` converts a stream of empty optionals to an empty stream. Otherwise, to a stream of non-empty 
+AncestorResults encapsulated into Optional. That construct is compatible with Java 8 and looks verbose. Luckily, 
+starting with Java 9, that could be simplified. Check more in this 
+[Baeldung](https://www.baeldung.com/java-filter-stream-of-optional) article.
