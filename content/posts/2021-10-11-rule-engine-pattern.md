@@ -132,3 +132,31 @@ A bit about the `flatMap()` operation. The previous `map()` function returns a s
 AncestorResults encapsulated into Optional. That construct is compatible with Java 8 and looks verbose. Luckily, 
 starting with Java 9, that could be simplified. Check more in this 
 [Baeldung](https://www.baeldung.com/java-filter-stream-of-optional) article.
+
+### Usage of rule engine
+
+Now, when we have all or rules implemented, the rule engine defined, let's see how to call and use this engine.
+
+```java
+public class ClientSideThatCallsTheRuleEngine {
+
+    public void executeClientCode() {
+        // some executions
+
+        AncestorRuleEngine ruleEngine = new AncestorRuleEngine();
+        String xpath = ruleEngine.process(selector).getValue();
+        
+        // other executions
+    }
+}
+```
+
+It is as simple as that. Instantiate a rule engine. Pass in the client's input and get the result. It's clean, short 
+and precise. We hide all the low-level logic of validating the input, building a respective result, processing it. 
+Compare it with the straightforward approach with multiple `if - else` branches. The more logic we add, the more 
+this `if - else` monster will grow.
+
+## Conclusion
+
+In this blog post I described an example of how to implement the rule engine pattern in Java. I'm glad I learned 
+about this pattern. And I'm sure that I will have more opportunities to use this pattern.
