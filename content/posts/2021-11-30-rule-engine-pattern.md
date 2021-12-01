@@ -5,31 +5,31 @@ author = "Vitali Plagov"
 draft = true
 +++
 
-In this blog post I would like to describe how I learned about the rule engine pattern while contributing to the
-open source project.
+In this blog post, I would like to describe how I learned about the rule engine pattern while contributing to the
+open-source project.
 <!--more-->
 
-Software developers work with 3rd party open source libraries on a daily basis. The more you use a library in your 
-day-to-day work, the more familiar you become with it. In my job as a test automation engineer, I work with 
-[Selenide](https://github.com/selenide/selenide) all the time. So, when I had to accomplish a certain task, I found 
-out that Selenide doesn't have a solution to help me with. So, I thought it could be a good opportunity to contribute 
-a new functionality into the open source library.
+Software developers work with 3rd party open source libraries daily. The more you use a library in your
+day-to-day work, the more familiar you become with it. In my job as a test automation engineer, I work with
+[Selenide](https://github.com/selenide/selenide) all the time. So, when I had to accomplish a certain task, I found
+out that Selenide doesn't have a solution to help me with. So, I thought it could be a good opportunity to contribute
+new functionality to the open-source library.
 
 ## Problem
 
-Here's the problem I had. The Selenide library has a function that finds an ancestor in the HTML DOM of the current 
-element. The ancestor is the same HTML element, so it has different attributes the one can use to locate it on the 
-page - a tag name, a class name, an attribute, an attribute with a value. So, the task is to build an XPath 
-expression for each of options.
+Here's the problem I had. The Selenide library has a function that finds an ancestor in the HTML DOM of the current
+element. The ancestor is the same HTML element, so it has different attributes the one can use to locate it on the
+page - a tag name, a class name, an attribute, an attribute with a value. So, the task is to build an XPath
+expression for each of the options.
 
-A very straightforward solution would be to make an `if - else if - else` statement. But  with four 
-options mentioned above that construct would look too sloppy. There must be a better and more clean approach of 
+A very straightforward solution would be to make an `if - else if - else` statement. But with the four
+options mentioned above, that construct would look too sloppy. There must be a better and more clean approach to
 accomplishing this.
 
 ## Rule Engine pattern
 
 There's indeed a better approach for such kind of problem - Rule Engine pattern.
-The essence of this pattern is to split each of `if - else if - else` branches in its own rule class. Then, the main 
+The essence of this pattern is to split each of `if - else if - else` branches in its rule class. Then, the main
 rule engine class will hold all the rules and will find the one that matches the client's request.
 
 ### Define a rule class
@@ -43,7 +43,7 @@ public interface AncestorRule {
 }
 ```
 
-Next, let's define the first rule class. That class wil hold the logic defined in the `if - else` branch:
+Next, let's define the first rule class. That class will hold the logic defined in the `if - else` branch:
 
 ```java
 public class AncestorWithClassRule implements AncestorRule {
@@ -62,20 +62,20 @@ public class AncestorWithClassRule implements AncestorRule {
 }
 ```
 
-So, here's the single logic that checks if the given selector matches the given condition - if it is a CSS class. 
-The `isCssClass()` is a function defined in the supper class (not shown here for brevity reasons). If the selector 
-indeed is a CSS class, then it builds an XPath expression and returns it as an Optional of a `AncestorResult`, 
+So, here's the single logic that checks if the given selector matches the given condition - if it is a CSS class.
+The `isCssClass()` is a function defined in the supper class (not shown here for brevity reasons). If the selector
+indeed is a CSS class, then it builds an XPath expression and returns it as an Optional of an `AncestorResult`,
 otherwise an empty Optional.
 
-This rule class is clean, short, easy to understand. It is written once and there's no need to modify it often, 
+This rule class is clean, short, easy to understand. It is written once and there's no need to modify it often,
 unless the business logic of the rule is updated.
 
-We define other rules the same way. Validate if the input matches the given condition, build and return a respective 
+We define other rules the same way. Validate if the input matches the given condition, build and return a respective
 XPath expression. Otherwise, an empty result.
 
 ### Rule result
 
-The above code has a usage of the `AncestorResult`. The purpose of this class is to wrap the result of the 
+The above code has usage of the `AncestorResult`. The purpose of this class is to wrap the result of the
 successful evaluation. This class looks as follows:
 
 ```java
@@ -120,22 +120,22 @@ public class AncestorRuleEngine {
 }
 ```
 
-First thing that is done in this class is a static list of all the rules that are applicable to this domain. If we 
+The first thing that is done in this class is a static list of all the rules that apply to this domain. If we
 have a new rule - we implement a new class and add it to this list of rules.
 
-Second thing is the processing of the client's input across all rules. It streams the list of rules, evaluates each 
-of them. The first non-empty result of the rule is being returned to the client. Otherwise, the rule engine will 
+The second thing is the processing of the client's input across all rules. It streams the list of rules, evaluates each
+of them. The first non-empty result of the rule is being returned to the client. Otherwise, the rule engine will
 throw an exception.
 
-A bit about the `flatMap()` operation. The previous `map()` function returns a stream of Optionals. Then, the 
-`flatMap()` converts a stream of empty optionals to an empty stream. Otherwise, to a stream of non-empty 
-AncestorResults encapsulated into Optional. That construct is compatible with Java 8 and looks verbose. Luckily, 
-starting with Java 9, that could be simplified. Check more in this 
+A bit about the `flatMap()` operation. The previous `map()` function returns a stream of Optionals. Then, the
+`flatMap()` converts a stream of empty Optionals to an empty stream. Otherwise, to a stream of non-empty
+AncestorResults encapsulated into Optional. That construct is compatible with Java 8 and looks verbose. Luckily,
+starting with Java 9, that could be simplified. Check more in this
 [Baeldung](https://www.baeldung.com/java-filter-stream-of-optional) article.
 
-### Usage of rule engine
+### Usage of a rule engine
 
-Now, when we have all or rules implemented, the rule engine defined, let's see how to call and use this engine.
+Now, when we have all or rules implemented, the rule engine is defined, let's see how to call and use this engine.
 
 ```java
 public class ClientSideThatCallsTheRuleEngine {
@@ -151,12 +151,12 @@ public class ClientSideThatCallsTheRuleEngine {
 }
 ```
 
-It is as simple as that. Instantiate a rule engine. Pass in the client's input and get the result. It's clean, short 
-and precise. We hide all the low-level logic of validating the input, building a respective result, processing it. 
-Compare it with the straightforward approach with multiple `if - else` branches. The more logic we add, the more 
+It is as simple as that. Instantiate a rule engine. Pass in the client's input and get the result. It's clean, short
+and precise. We hide all the low-level logic of validating the input, building a respective result, processing it.
+Compare it with the straightforward approach with multiple `if - else` branches. The more logic we add, the more
 this `if - else` monster will grow.
 
 ## Conclusion
 
-In this blog post I described an example of how to implement the rule engine pattern in Java. I'm glad I learned 
+In this blog post, I described an example of how to implement the rule engine pattern in Java. I'm glad I learned
 about this pattern. And I'm sure that I will have more opportunities to use this pattern.
