@@ -1,8 +1,9 @@
 +++
 title = "How I learned about the rule engine pattern with Java"
-date = "2021-11-30"
+date = "2021-12-01"
 author = "Vitali Plagov"
-draft = true
+tags = ["java", "design-patterns"]
+draft = false
 +++
 
 In this blog post, I would like to describe how I learned about the rule engine pattern while contributing to the
