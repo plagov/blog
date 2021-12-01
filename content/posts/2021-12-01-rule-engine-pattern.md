@@ -40,7 +40,7 @@ implement:
 
 ```java
 public interface AncestorRule {
-  Optional<AncestorResult> evaluate(String selector);
+    Optional<AncestorResult> evaluate(String selector);
 }
 ```
 
