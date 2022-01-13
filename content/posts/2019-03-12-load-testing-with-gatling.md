@@ -47,7 +47,7 @@ Since we're using Maven, a `gatling-maven-plugin` should be added. Put this bloc
 <plugin>
   <groupId>io.gatling</groupId>
   <artifactId>gatling-maven-plugin</artifactId>
-  <version>3.1.2</version>
+  <version>4.1.0</version>
 </plugin>
 ```
 
@@ -58,6 +58,14 @@ And the final thing, to be able to run Scala with Maven, add `scala-maven-plugin
   <groupId>net.alchim31.maven</groupId>
   <artifactId>scala-maven-plugin</artifactId>
   <version>4.5.6</version>
+  <executions>
+    <execution>
+      <goals>
+        <goal>compile</goal>
+        <goal>testCompile</goal>
+      </goals>
+    </execution>
+  </executions>
 </plugin>
 ```
 
