@@ -114,7 +114,7 @@ public class AncestorRuleEngine {
         return rules
             .stream()
             .map(rule -> rule.evaluate(selector))
-            .flatMap(optional -> optional.map(Stream::of).orElseGet(Stream::empty))
+            .flatMap(Optional::stream)
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("Selector does not match any rule"));
     }
@@ -127,12 +127,6 @@ have a new rule - we implement a new class and add it to this list of rules.
 The second thing is the processing of the client's input across all rules. It streams the list of rules, evaluates each
 of them. The first non-empty result of the rule is being returned to the client. Otherwise, the rule engine will
 throw an exception.
-
-A bit about the `flatMap()` operation. The previous `map()` function returns a stream of Optionals. Then, the
-`flatMap()` converts a stream of empty Optionals to an empty stream. Otherwise, to a stream of non-empty
-AncestorResults encapsulated into Optional. That construct is compatible with Java 8 and looks verbose. Luckily,
-starting with Java 9, that could be simplified. Check more in this
-[Baeldung](https://www.baeldung.com/java-filter-stream-of-optional) article.
 
 ### Usage of a rule engine
 
@@ -161,3 +155,5 @@ this `if - else` monster will grow.
 
 In this blog post, I described an example of how to implement the rule engine pattern in Java. I'm glad I learned
 about this pattern. And I'm sure that I will have more opportunities to use this pattern.
+
+See the full code in this [GitHub repository](https://github.com/plagov/blog-examples/tree/master/rule-engine-pattern).
