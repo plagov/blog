@@ -5,10 +5,10 @@ on:
       - master
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Git checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Update theme
         run: git submodule update --init --recursive
