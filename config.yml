@@ -1,10 +1,9 @@
 languageCode: "en-us"
 baseUrl: ""
 title: "Vitali Plagov Blog"
-theme: "anubis"
+theme: ["PaperMod"]
 paginate: 10
 disqusShortname: vplagov
-googleAnalytics: UA-129563212-1
 enableRobotsTXT: true
 
 menu:
@@ -21,17 +20,13 @@ menu:
     weight: 0
 
 params:
-  author: "Vitali Plagov"
-  description: ""
-  images:
-    - images/og-featured.png # relative path to "static" directory
-  dateFormat: "2006-01-02"
-  paginationSinglePost: true
-  style: auto
-  readMore: false
   env: production
-  customCSS:
-     - css/myCustomStyle.css
+  author: "Vitali Plagov"
+  defaultTheme: auto
+  DateFormat: "2006-01-02"
+  ShowShareButtons: false
+  disableSpecial1stPost: true
+  description: ""
 
 markup:
   goldmark:
