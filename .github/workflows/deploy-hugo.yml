@@ -21,7 +21,7 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.DEPLOY_HUGO_TOKEN }}
           external_repository: plagov/plagov.github.io
           publish_dir: ./public
           user_name: Vitali Plagov
