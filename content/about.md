@@ -9,8 +9,8 @@ author = "Vitali Plagov"
 Hello.
 
 My name is Vitali Plagov. This is my personal blog where I'm writing about my experience in programming and software
-development. Currently, I'm working as a Test Automation Engineer for [Topia](https://www.topia.com/) in Tallinn, 
-Estonia.
+development. Currently, I'm working as a Software Development Engineer in Test for 
+[Riverty](https://www.linkedin.com/company/riverty/) in Tallinn, Estonia.
 
 You can find me on these social networks:
 
