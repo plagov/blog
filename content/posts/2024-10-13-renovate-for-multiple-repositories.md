@@ -115,35 +115,37 @@ steps:
 
 ### Explaining the `config.js` configuration
 Let's go through the configuration file step by step to explain what it does.
-The configuration starts with the `extends` block which is meant to list all the built-in presets the Renovate bot has.
+The configuration starts with the `extends` block, which is meant to list all the built-in presets that the Renovate bot has.
 For the full list of presets, please refer to the [Renovate documentation](https://docs.renovatebot.com/presets-default/)
-to find presets suited for your project. Two presets we found to be useful for different teams in our organization are
-`:automergeAll`. It marks the Pull Request in Azure Repos to auto-complete once all required checks have passed.
-And the second is `group:monorepos` which will group all the package updates coming from the same mono repository into a
-single PR. That will first limit the amount of PRs raised and secondly will avoid the scenario with failing builds when
-two packages from the same monorepo are dependent on each other, but those are updated separately.
+to find presets suitable for your project. Two presets that we have found useful for different teams in our organisation are
+`:automergeAll'`. This marks the pull request in Azure Repos to be automatically merged once all the required checks 
+have been passed. And the second is `group:monorepos`, which merges all package updates coming from the same mono 
+repository into a single PR. This will firstly limit the number of PRs raised, and secondly avoid the failed builds 
+scenario when two packages from the same monorepo are dependent on each other, but are updated separately.
 
-The next block is `packageRules`. It allows you to group the packages into groups by a name. So, all the package updates
-matching the pattern will be grouped and updated all at once. Such package grouping helped us to solve the following issue.
-Our projects are running on .NET 8, which is an LTS version. There have been a lot of updates of `Micrososft.AspNetCore.*`,
-`Microsoft.Extensions.*`, etc. packages. Some of them were compatible with .NET 8, while others required .NET 9. 
-`AspNetCore` packages where those that required .NET 9. But all those `Microsoft.*` packages came within a single PR 
-making it impossible to merge. Yet, we didn't want to ignore those updates that were compatible with .NET 8.
-I have identified packages that required .NET 9 and grouped them into a separate group. So, when a new PR came with
-just that update, I was able to reject it and accept others separately.
+The next block is `packageRules`. This allows you to group packages by name. So all package updates
+that match the pattern will be grouped and updated at once. Such package grouping helped us to solve the following problem.
+Our projects run on .NET 8, which is an LTS version. There have been a lot of updates to `Micrososft.AspNetCore.*`,
+`Microsoft.Extensions.*`, etc. packages. Some of them were compatible with .NET 8, others required .NET 9. 
+The `AspNetCore` packages were the ones that required .NET 9. But all these `Microsoft.*` packages were in a single PR
+making it impossible to merge them. However, we didn't want to ignore those updates that were compatible with .NET 8.
+I identified packages that required .NET 9 and put them into a separate group. That way, if a new PR came out with
+update, I could reject it and accept others separately.
 
 The next block `hostRules` along with some fields are a common configuration for the bot to set the platform it will 
-use to look for updates. Plus, the Private Access Token (PAT) to use.
+use to look for updates. Also, the Private Access Token (PAT) to use.
 
-The `regexManagers` block is another customization for the bot's configuration. In our organization we have a private
-docker image registry we use to cache the docker images we pull first from the public registries. Because our private 
-registry doesn't store newly released tags, we have to fetch updates from Docker Hub and other public registries. Thus,
-we have to parse the docker-compose file or Dockerfiles to get the docker image name and tag.
-So, the `fileMatch` field sets the regex for the file name to look for.
-The `matchStrings` field is a regex patter to find within the file. A very important thing here is to catch the package
-name inside the regex group called `depName` and the current package version inside the `currentValue` group. 
-The `datasourceTemplate` is an instruction to Renovate to tell which package manager to use. It will take values from 
-above regex groups and will search for updates against specified package manager.
+The `regexManagers` block is another customisation for the configuration of the bot. In our organisation, we have a private
+docker image registry that we use to cache the docker images that we first pull from the public registries. Because our 
+private registry doesn't store newly released tags, we have to fetch updates from Docker Hub and other public registries. 
+So, we need to parse the docker-compose file or dockerfiles to get the docker image name and tag.
 
-The last important block is the `repositories` list, which includes all the projects that Renovate will scan and maintain.
-In Azure Repos, those should be defined under format `project-name/repository-name`.
+
+So, the `fileMatch` field sets the regex for the filename to look for.
+The `matchStrings` field is a regex pattern to find within the file. A very important thing here is to put the package
+name in the `depName` regex group and the current package version in the `currentValue` group. 
+The `datasourceTemplate` is an instruction to Renovate telling it which package manager to use. It will take values from the
+regex groups above and will look for updates against the specified package manager.
+
+The last important block is the `repositories` list, which contains all the projects that Renovate will scan and maintain.
+In Azure Repos, these should be defined in the format `project-name/repository-name`.
